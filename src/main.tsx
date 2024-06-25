@@ -12,6 +12,7 @@ import { persistor, store } from '~/store';
 
 import reportWebVitals from './reportWebVitals';
 import Root from './Root';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 window.store = store;
 

@@ -22,9 +22,12 @@ import SystemAlerts from '~/containers/SystemAlerts';
 import Home from '~/routes/Home';
 import NotFound from '~/routes/NotFound';
 import Private from '~/routes/Private';
+import Login from '~/routes/Login';
+import Register from '~/routes/Register';
 
 import { selectUser } from '~/selectors';
 import { UserState } from '~/types';
+import Dashoard from './routes/Dashoard';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -49,7 +52,7 @@ function Root() {
 
   useEffect(() => {
     if (changed('isAuthenticated', true)) {
-      dispatch(alertShow('Hello! And welcome!', { type: 'success', icon: 'bell', timeout: 10 }));
+      dispatch(alertShow('Login SuccessFull!', { type: 'success', icon: 'bell', timeout: 10 }));
     }
   }, [dispatch, changed]);
 
@@ -89,10 +92,34 @@ function Root() {
                 }
                 path="/private"
               />
+              <Route
+                element={
+                  <PublicRoute isAuthenticated={isAuthenticated} to="/private">
+                    <Register />
+                  </PublicRoute>
+                }
+                path="/Register"
+              />
+              <Route
+                element={
+                  <PublicRoute isAuthenticated={isAuthenticated} to="/private">
+                    <Login />
+                  </PublicRoute>
+                }
+                path="/Login"
+              />
+              <Route
+                element={
+                  // <PrivateRoute isAuthenticated={isAuthenticated} isAdmin={false} to="/private">
+                    <Dashoard />
+                  // </PrivateRoute>
+                }
+                path="/Dashoard"
+              />
               <Route element={<NotFound />} path="*" />
             </Routes>
           </Main>
-          <Footer />
+          {/* <Footer /> */}
           <SystemAlerts />
         </AppWrapper>
       </ThemeProvider>

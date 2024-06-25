@@ -51,7 +51,7 @@ function Home() {
 
   const handleClickLogin = () => {
     dispatch(login());
-  };
+  };   
 
   return (
     <Background key="Home" data-component-name="Home">

@@ -11,8 +11,9 @@ export default function PrivateRoute(props: Props) {
   const { children, isAuthenticated, to = '/login' } = props;
 
   const { pathname = '' } = useLocation();
-
-  return isAuthenticated ? (
+  
+  // console.log("isAdmin", isAdmin)
+  return isAuthenticated? (
     children
   ) : (
     <Navigate state={{ redirect: pathname, isAuthenticated }} to={to} />
