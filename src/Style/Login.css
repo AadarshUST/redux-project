@@ -9,7 +9,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-section {
+.LoginSection {
     position: relative;
     min-height: 100vh;
     background-color: rgba(40, 37, 37, 0.753);

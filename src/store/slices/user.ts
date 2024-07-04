@@ -6,19 +6,24 @@ import { UserState } from '~/types';
 
 export const userState: UserState = {
   isAuthenticated: false,
+  role: 2,
   status: STATUS.IDLE,
+
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState: userState,
   reducers: {
-    login: draft => {
+    login: (draft, { payload }) => {
+      // console.log(draft.status);
       draft.status = STATUS.RUNNING;
+      draft.role = payload;
     },
     loginSuccess: draft => {
       draft.isAuthenticated = true;
       draft.status = STATUS.READY;
+
     },
     logOut: draft => {
       draft.status = STATUS.RUNNING;
@@ -26,6 +31,7 @@ export const userSlice = createSlice({
     logOutSuccess: draft => {
       draft.isAuthenticated = false;
       draft.status = STATUS.IDLE;
+
     },
   },
 });

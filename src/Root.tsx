@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -14,7 +14,7 @@ import theme, { headerHeight } from '~/modules/theme';
 
 import { alertShow } from '~/actions';
 
-import Footer from '~/components/Footer';
+// import Footer from '~/components/Footer';
 import Header from '~/components/Header';
 import PrivateRoute from '~/components/PrivateRoute';
 import PublicRoute from '~/components/PublicRoute';
@@ -27,7 +27,9 @@ import Register from '~/routes/Register';
 
 import { selectUser } from '~/selectors';
 import { UserState } from '~/types';
-import Dashoard from './routes/Dashoard';
+import Dashboard from './routes/Dashboard';
+import Post from './routes/Post';
+import DashboardHome from './components/DashboardComponents/Home'
 
 const AppWrapper = styled.div`
   display: flex;
@@ -47,8 +49,11 @@ function Root() {
   const dispatch = useDispatch();
   const user = useAppSelector(selectUser);
   const { changed } = useTreeChanges(user);
+  // const [handelAdmin, setHandelAdmin] = useState(false);
 
-  const { isAuthenticated } = user;
+  const { isAuthenticated, role } = user;
+
+  // console.log(user.role);
 
   useEffect(() => {
     if (changed('isAuthenticated', true)) {
@@ -108,14 +113,27 @@ function Root() {
                 }
                 path="/Login"
               />
-              <Route
+              {/* <Route element={<Dashboard />} path="/dashboard">
+                
+              </Route> */}
+
+              <Route element={
+                <PrivateRoute isAuthenticated={isAuthenticated} to="/Login">
+                  <Dashboard isAdmin={role} />
+                </PrivateRoute>
+              } path="/dashboard">
+                <Route element={<DashboardHome />} path="/dashboard" />
+                <Route element={<Post />} path="/dashboard/post" />
+              </Route>
+
+              {/* <Route
                 element={
                   // <PrivateRoute isAuthenticated={isAuthenticated} isAdmin={false} to="/private">
-                    <Dashoard />
+                  <Dashboard />
                   // </PrivateRoute>
                 }
-                path="/Dashoard"
-              />
+                path="/Dashboard"
+              /> */}
               <Route element={<NotFound />} path="*" />
             </Routes>
           </Main>

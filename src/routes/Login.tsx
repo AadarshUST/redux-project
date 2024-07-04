@@ -1,10 +1,12 @@
 import { ChangeEvent, useState, FormEvent } from 'react';
 import LoginImg from '../Assets/login.jpeg';
-import '../Style/Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '~/actions';
 import Alert from 'react-bootstrap/Alert';
+import '../Style/Login.css';
+
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -29,19 +31,25 @@ const Login = () => {
       });
       response = await response.json();
       console.log(response);
+      console.log("login", login(response.user.roleId));
       if (response.success) {
-        if (response.user.roleId ===1) {
-          navigate("/Dashoard");
-        }
-        else{
-          dispatch(login())
-        }
+        dispatch(login(response.user.roleId));
+
+        // if (response.user.roleId === 1) {
+        //   props.isAdmin(response.user.roleId);
+        //   console.log("abcedjhckjbcjeycge ===> ", props.isAdmin(response.user.roleId));
+        //   navigate('/dashboard');
+        // }
+        // else {
+        //   dispatch(login(response.user.roleId))
+        // }
       } else {
         setAlert({ show: true, message: response.msg });
       }
     } catch (error) {
       console.log('Error submitting form:', error);
-      setAlert({show: true,message: 'An error occurred while logging in. Please try again later.',
+      setAlert({
+        show: true, message: 'An error occurred while logging in. Please try again later.',
       });
     }
   };
@@ -49,8 +57,8 @@ const Login = () => {
   // };
 
   return (
-    <section>
-     {alert.show && (
+    <section className='LoginSection'>
+      {alert.show && (
         <div className='alert-msg'>
           <Alert variant="danger" onClose={() => setAlert({ show: false, message: '' })} dismissible>
             <Alert.Heading>Error!</Alert.Heading>
@@ -64,16 +72,16 @@ const Login = () => {
             <img src={LoginImg} alt="" />
           </div>
           <div className="formBx">
-            
-             
+
+
             <form onSubmit={handleSubmit}>
-               
+
               <h2>Sign In</h2>
-              
-              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required/>
-              <input type="password"name="password"placeholder="Password" value={formData.password} onChange={handleChange} required />
+
+              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+              <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
               <input type="submit" name="" value="Login" />
-              
+
               <p className="signup">Don't have an account ?<Link to="/Register">Sign Up.</Link>
               </p>
             </form>

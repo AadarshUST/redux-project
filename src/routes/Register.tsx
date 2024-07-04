@@ -12,7 +12,7 @@ const Register = () => {
     phoneNo: '',
     dob: '',
   });
-  
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -34,7 +34,7 @@ const Register = () => {
         setAlert({ show: true, message: response.msg });
         throw new Error('Network response was not ok');
       }
-      else{
+      else {
         setAlert({ show: true, message: response.msg });
         console.log('Registration successful');
         navigate("/Login");
@@ -47,7 +47,7 @@ const Register = () => {
   };
 
   return (
-    <section>
+    <section className='LoginSection'>
       {alert.show && (
         <div className='alert-msg'>
           <Alert variant="danger" onClose={() => setAlert({ show: false, message: '' })} dismissible>
@@ -62,8 +62,8 @@ const Register = () => {
             <form onSubmit={handleSubmit}>
               <h2>Create an account</h2>
               <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
-              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required/>
-              <input type="password" name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required/>
+              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+              <input type="password" name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
               <input type="tel" name="phoneNo" placeholder="Phone Number" value={formData.phoneNo} onChange={handleChange} required />
               <input type="date" name="dob" placeholder="Date of Birth" value={formData.dob} onChange={handleChange} required />
               <input type="submit" value="Sign Up" />
