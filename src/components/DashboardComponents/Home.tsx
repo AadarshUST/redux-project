@@ -1,8 +1,11 @@
 // import React from 'react'
+import { useState } from 'react';
 import { BsFillArchiveFill, BsFillGrid3X3GapFill, BsPeopleFill, BsFillBellFill }
     from 'react-icons/bs'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line }
     from 'recharts';
+import AddRecipes from './AddRecipes';
+import { Button, Modal } from 'react-bootstrap';
 
 function Home() {
 
@@ -51,6 +54,11 @@ function Home() {
         },
     ];
 
+    const [show, setShow] = useState<boolean>(false); // Explicitly annotate show as boolean
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     return (
         <main className='main-container'>
@@ -75,7 +83,23 @@ function Home() {
                 </div>
                 <div className='card'>
                     <div className='card-inner'>
-                        <h3>CUSTOMERS</h3>
+                        <h3 onClick={handleShow}>
+                            ADD RECIPE
+                        </h3>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Modal heading</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <AddRecipes closeModal={handleClose} />
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+
                         <BsPeopleFill className='card_icon' />
                     </div>
                     <h1>33</h1>

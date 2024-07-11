@@ -5,8 +5,10 @@ import { useDispatch } from 'react-redux';
 import { login } from '~/actions';
 import Alert from 'react-bootstrap/Alert';
 import '../Style/Login.css';
+import React from 'react';
 
-
+export let token: string; // Declare the type of token variable
+export let userID: string;
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,16 +35,9 @@ const Login = () => {
       console.log(response);
       console.log("login", login(response.user.roleId));
       if (response.success) {
+        token = response.token;
+        userID = response.user.id;
         dispatch(login(response.user.roleId));
-
-        // if (response.user.roleId === 1) {
-        //   props.isAdmin(response.user.roleId);
-        //   console.log("abcedjhckjbcjeycge ===> ", props.isAdmin(response.user.roleId));
-        //   navigate('/dashboard');
-        // }
-        // else {
-        //   dispatch(login(response.user.roleId))
-        // }
       } else {
         setAlert({ show: true, message: response.msg });
       }
@@ -91,4 +86,5 @@ const Login = () => {
     </section>
   );
 };
+
 export default Login;

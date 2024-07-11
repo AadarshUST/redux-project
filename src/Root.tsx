@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -107,7 +107,7 @@ function Root() {
               />
               <Route
                 element={
-                  <PublicRoute isAuthenticated={isAuthenticated} to="/private">
+                  <PublicRoute isAuthenticated={isAuthenticated} to="/dashboard">
                     <Login />
                   </PublicRoute>
                 }
