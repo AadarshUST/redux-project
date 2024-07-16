@@ -1,0 +1,28 @@
+.cardList {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #18273f;
+    padding-top: 15px;
+}
+
+.custom-card {
+    background-color: #4753689b !important;
+    color: #333;
+    cursor: pointer;
+    transition: all 1s;
+}
+
+.custom-card:hover {
+    padding: 25px 25px;
+    box-shadow: 10px 10px 20px rgba(255, 255, 255, 0.203);
+}
+
+.custom-title {
+    color: #d8d8dac2;
+}
+
+.custom-text {
+    color: #9e9ea4bd;
+}

@@ -102,7 +102,7 @@ function Home() {
 
                         <BsPeopleFill className='card_icon' />
                     </div>
-                    <h1>33</h1>
+                    <h1 onClick={handleShow}>+</h1>
                 </div>
                 <div className='card'>
                     <div className='card-inner'>

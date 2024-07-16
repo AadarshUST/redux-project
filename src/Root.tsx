@@ -30,6 +30,7 @@ import { UserState } from '~/types';
 import Dashboard from './routes/Dashboard';
 import Post from './routes/Post';
 import DashboardHome from './components/DashboardComponents/Home'
+import LandingPage from './routes/LandingPage';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -83,8 +84,8 @@ function Root() {
             <Routes>
               <Route
                 element={
-                  <PublicRoute isAuthenticated={isAuthenticated} to="/private">
-                    <Home />
+                  <PublicRoute isAuthenticated={isAuthenticated} to="/landingpage">
+                    <LandingPage />
                   </PublicRoute>
                 }
                 path="/"
@@ -92,10 +93,10 @@ function Root() {
               <Route
                 element={
                   <PrivateRoute isAuthenticated={isAuthenticated} to="/">
-                    <Private />
+                    <LandingPage />
                   </PrivateRoute>
                 }
-                path="/private"
+                path="/landingpage"
               />
               <Route
                 element={
@@ -118,12 +119,12 @@ function Root() {
               </Route> */}
 
               <Route element={
-                <PrivateRoute isAuthenticated={isAuthenticated} to="/Login">
+                <PrivateRoute isAuthenticated={isAuthenticated} to="/">
                   <Dashboard isAdmin={role} />
                 </PrivateRoute>
               } path="/dashboard">
                 <Route element={<DashboardHome />} path="/dashboard" />
-                <Route element={<Post />} path="/dashboard/post" />
+                <Route element={<Post />} path="post" />
               </Route>
 
               {/* <Route
