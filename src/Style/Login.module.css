@@ -129,23 +129,23 @@
 /* .Boxcontainer .signupBx {
     pointer-events: none;
 }
-
+ 
 .Boxcontainer.active .signupBx {
     pointer-events: initial;
 }
-
+ 
 .Boxcontainer .signupBx .formBx {
     left: 100%;
 }
-
+ 
 .Boxcontainer.active .signupBx .formBx {
     left: 0;
 }
-
+ 
 .Boxcontainer .signupBx .imgBx {
     left: -100%;
 }
-
+ 
 .Boxcontainer.active .signupBx .imgBx {
     left: 0%;
 } */

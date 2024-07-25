@@ -16,9 +16,9 @@ const Dashoard = (props: Props) => {
     setOpenSidebarToggle(!openSidebarToggle)
   }
   const { pathname = '' } = useLocation();
-  const to = '/landingpage';
+  const to = '/';
 
-  console.log("Dashboard =>>>>>>>>>>>> " + props.isAdmin);
+  // console.log("Dashboard =>>>>>>>>>>>> " + props.isAdmin);
 
   return (
     <>

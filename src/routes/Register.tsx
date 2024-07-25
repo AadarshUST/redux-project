@@ -1,8 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
-import '../Style/Login.css';
 import signupImage from '../Assets/signup.jpeg';
 import { Link, useNavigate } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import style from '../Style/Login.module.css';
+
 const Register = () => {
   const [alert, setAlert] = useState({ show: false, message: '' });
   const [formData, setFormData] = useState({
@@ -47,18 +48,18 @@ const Register = () => {
   };
 
   return (
-    <section className='LoginSection'>
+    <section className={style['LoginSection']}>
       {alert.show && (
-        <div className='alert-msg'>
+        <div className={style['alert-msg']}>
           <Alert variant="danger" onClose={() => setAlert({ show: false, message: '' })} dismissible>
             <Alert.Heading>Error!</Alert.Heading>
             <p>{alert.message}</p>
           </Alert>
         </div>
       )}
-      <div className="Boxcontainer">
-        <div className="user signupBx">
-          <div className="formBx">
+      <div className={style["Boxcontainer"]}>
+        <div className={`${style["user"]} ${style["signupBx"]}`}>
+          <div className={style["formBx"]}>
             <form onSubmit={handleSubmit}>
               <h2>Create an account</h2>
               <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
@@ -67,12 +68,12 @@ const Register = () => {
               <input type="tel" name="phoneNo" placeholder="Phone Number" value={formData.phoneNo} onChange={handleChange} required />
               <input type="date" name="dob" placeholder="Date of Birth" value={formData.dob} onChange={handleChange} required />
               <input type="submit" value="Sign Up" />
-              <p className="signup">
+              <p className={style["signup"]}>
                 Already have an account? <Link to="/Login">Sign in.</Link>
               </p>
             </form>
           </div>
-          <div className="imgBx">
+          <div className={style["imgBx"]}>
             <img src={signupImage} alt="Signup" />
           </div>
         </div>

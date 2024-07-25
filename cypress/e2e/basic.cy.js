@@ -3,7 +3,8 @@ describe('React-Redux-Saga-Boilerplate', () => {
     cy.visit('/');
 
     // should have the correct tile
-    cy.title().should('include', 'React Redux Saga Boilerplate');
+     cy.title().should('include', 'React Redux Saga Boilerplate');
+    // cy.title().should('include', 'Recipe Platform');
 
     // should have a Start button and enter the app
     cy.findByTestId('Start').should('contain', 'Start').click();

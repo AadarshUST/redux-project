@@ -19,9 +19,9 @@ import Header from '~/components/Header';
 import PrivateRoute from '~/components/PrivateRoute';
 import PublicRoute from '~/components/PublicRoute';
 import SystemAlerts from '~/containers/SystemAlerts';
-import Home from '~/routes/Home';
+// import Home from '~/routes/Home';
 import NotFound from '~/routes/NotFound';
-import Private from '~/routes/Private';
+// import Private from '~/routes/Private';
 import Login from '~/routes/Login';
 import Register from '~/routes/Register';
 
@@ -31,6 +31,9 @@ import Dashboard from './routes/Dashboard';
 import Post from './routes/Post';
 import DashboardHome from './components/DashboardComponents/Home'
 import LandingPage from './routes/LandingPage';
+import EachRecipe from './routes/EachRecipe';
+import RecipeForm from './routes/RecipeForm';
+import './Style/Global.css';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -84,19 +87,23 @@ function Root() {
             <Routes>
               <Route
                 element={
-                  <PublicRoute isAuthenticated={isAuthenticated} to="/landingpage">
-                    <LandingPage />
-                  </PublicRoute>
+                  <LandingPage />
                 }
                 path="/"
               />
               <Route
+                // element={<LandingPage />}
+                element={<EachRecipe />}
+                path='/:id'
+              />
+              <Route
                 element={
-                  <PrivateRoute isAuthenticated={isAuthenticated} to="/">
-                    <LandingPage />
+                  <PrivateRoute isAuthenticated={isAuthenticated} to="/Login">
+                    <RecipeForm />
                   </PrivateRoute>
+
                 }
-                path="/landingpage"
+                path='/edit-recipe/:id'
               />
               <Route
                 element={
@@ -108,18 +115,14 @@ function Root() {
               />
               <Route
                 element={
-                  <PublicRoute isAuthenticated={isAuthenticated} to="/dashboard">
+                  <PublicRoute isAuthenticated={isAuthenticated}>
                     <Login />
                   </PublicRoute>
                 }
                 path="/Login"
               />
-              {/* <Route element={<Dashboard />} path="/dashboard">
-                
-              </Route> */}
-
               <Route element={
-                <PrivateRoute isAuthenticated={isAuthenticated} to="/">
+                <PrivateRoute isAuthenticated={isAuthenticated}>
                   <Dashboard isAdmin={role} />
                 </PrivateRoute>
               } path="/dashboard">

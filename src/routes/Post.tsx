@@ -3,7 +3,7 @@ import { ICellRendererParams } from 'ag-grid-community';
 import axios from 'axios';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
-import "../Style/Post.css";
+import style from "../Style/Post.module.css";
 import { AgGridReact } from 'ag-grid-react';
 import { token } from './Login';
 
@@ -15,9 +15,6 @@ interface PostData {
 }
 
 const Post = () => {
-
-    console.log("post component rendered");
-
     const [rowData, setRowData] = useState<PostData[]>([]);
 
     useEffect(() => {
@@ -36,7 +33,6 @@ const Post = () => {
     const handleApprove = async (params: ICellRendererParams) => {
         try {
             const { data } = params;
-            //const token = localStorage.getItem('token'); // Adjust this according to your token storage method
             await axios.patch(`http://localhost:5000/api/posts/updateStatus/${data.id}`, {}, {
                 headers: {
                     Authorization: token
@@ -62,15 +58,21 @@ const Post = () => {
     const editButtonRenderer = (params: ICellRendererParams) => {
         const { recipeStatus } = params.data;
         const buttonText = recipeStatus === 'Approved' ? 'Approved' : 'Pending';
-        return <button className={buttonText === "Approved" ? "btn-approve" : "btn-pending"} onClick={() => handleApprove(params)}>{buttonText}</button>;
+        return <button className={buttonText === "Approved" ? style["btn-approve"] : style["btn-pending"]} onClick={() => handleApprove(params)}>{buttonText}</button>;
     };
 
     const deleteButtonRenderer = (params: ICellRendererParams) => {
-        return <button className={"btn-delete"} onClick={() => handleDeleteClick(params)}>Remove</button>;
+        return <button className={style["btn-delete"]} onClick={() => handleDeleteClick(params)}>Remove</button>;
+    };
+
+    const avatarFormatter = ({ value }: any) => {
+        console.log(value);
+
+        return <img src={`http://localhost:5000/images/` + value} width="50px" height="50px" />;
     };
 
     const columnDefs = [
-        { field: 'recipeImgName', headerName: 'Image', sortable: true, filter: true, cellClass: 'vertical-middle' },
+        { field: 'recipeImgName', headerName: 'Image', sortable: true, filter: true, cellRenderer: avatarFormatter, cellClass: 'vertical-middle' },
         { field: 'recipeName', headerName: 'Recipe Name', sortable: true, filter: true, cellClass: 'vertical-middle' },
         { field: 'recipeStatus', headerName: 'Status', sortable: true, filter: true, cellClass: 'vertical-middle' },
         {
@@ -89,8 +91,8 @@ const Post = () => {
     ];
 
     return (
-        <div className="App">
-            <div className="ag-theme-alpine ag-style" style={{ width: "76vw", height: "91vh" }}>
+        <div className={style["App"]}>
+            <div className={`ag-theme-alpine ${style["ag-style"]}`} style={{ width: "76vw", height: "91vh" }}>
                 <AgGridReact
                     defaultColDef={{ flex: 1 }}
                     rowHeight={60}

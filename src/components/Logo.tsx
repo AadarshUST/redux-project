@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 function Logo() {
   return (
     <Wrapper>
-      <SVG src="/media/brand/icon.svg" />
+      <SVG src="/media/brand/iconLogo.svg" />
     </Wrapper>
   );
 }

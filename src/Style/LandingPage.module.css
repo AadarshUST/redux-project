@@ -1,10 +1,17 @@
 .cardList {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     background-color: #18273f;
     padding-top: 15px;
+}
+
+.link,
+.link:hover {
+    text-decoration: none;
 }
 
 .custom-card {
@@ -19,10 +26,20 @@
     box-shadow: 10px 10px 20px rgba(255, 255, 255, 0.203);
 }
 
+.imgSize {
+    height: 280px;
+}
+
 .custom-title {
+    font-size: 25px;
     color: #d8d8dac2;
 }
 
 .custom-text {
     color: #9e9ea4bd;
+    font-weight: 450;
+}
+
+.custom-text h3 {
+    color: white;
 }
